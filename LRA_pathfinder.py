@@ -12,7 +12,7 @@ class Args:
                  contour_path = './contour', batch_id=0, n_images = 200000,
                  window_size=[256,256], padding=22, antialias_scale = 4,
                  LABEL =1, seed_distance= 27, marker_radius = 3,
-                 contour_length=15, distractor_length=5, num_distractor_snakes=6, snake_contrast_list=[1.], use_single_paddles=True,
+                 contour_length=15, distractor_length=5, num_distractor_snakes=6, snake_contrast_list=[1.], use_single_paddles=False,
                  max_target_contour_retrial = 4, max_distractor_contour_retrial = 4, max_paddle_retrial=2,
                  continuity = 1.4, paddle_length=5, paddle_thickness=1.5, paddle_margin_list=[4], paddle_contrast_list=[1.],
                  pause_display=False, save_images=True, save_metadata=True):
