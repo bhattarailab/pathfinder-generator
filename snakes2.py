@@ -235,6 +235,39 @@ def from_wrapper(args):
     t = time.time()
     iimg = 0
 
+    ###################################
+    #### IF Already exists Either move previous folder
+    contour_sub_path = os.path.join(args.contour_path, 'imgs', str(args.batch_id))
+
+    if os.path.exists(contour_sub_path):
+        print('Data file already exists.')
+        ### Copy the root path with a new name "*_bkp#"
+        rand_integer = -np.random.randint(10000000)
+        contour_sub_path2 = contour_sub_path+"_bkp%s"%rand_integer
+        try:
+            ### Rename Image Folder
+            print("Renaming image folder")
+            os.rename(contour_sub_path, contour_sub_path2)
+        except:
+            print("Can't backup folder: "+contour_sub_path+" to " + contour_sub_path2)
+            print("DELETING !!")
+            shutil.rmtree(contour_sub_path)
+            pass
+
+        try:
+            ### Rename Metadata file
+            metadata_sub_path = os.path.join(args.contour_path, 'metadata', str(args.batch_id)+".npy")
+            print("Renaming metadata file")
+            metadata_sub_path2 = os.path.join(args.contour_path, 'metadata', str(args.batch_id)+"_bkp%s.npy"%rand_integer)
+            os.rename(metadata_sub_path, metadata_sub_path2)
+
+        except:
+            print("Can't backup file: "+metadata_sub_path+" to " + metadata_sub_path2)
+            print("DELETING !!")
+            os.remove(metadata_sub_path)
+            pass
+    ###################################
+
     if (args.save_images):
         contour_sub_path = os.path.join('imgs', str(args.batch_id))
         if not os.path.exists(os.path.join(args.contour_path, contour_sub_path)):
