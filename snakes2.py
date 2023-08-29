@@ -257,7 +257,7 @@ def from_wrapper(args):
 
     while (iimg < args.n_images):
         label = np.random.randint(low=0,high=2)
-        print('Image# : %s'%(iimg))
+        # print('Image# : %s'%(iimg))
 
         # Sample paddle margin
         num_possible_margins = len(args.paddle_margin_list)

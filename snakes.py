@@ -269,10 +269,10 @@ def extend_snake(last_pivot, last_orientation, last_segment_mask,
                 continue
             ## TODO: ADD JITTERED ORIENTATION
         if segment_found == False:
-            print('extend_snake: self-crossing detected')
-            print('pmf of sample ='+str(pmf[0,sampled_index]))
-            print('mask at sample ='+str(dilated_mask[new_head[0],new_head[1]]))
-            print('smaple ='+str(new_head))
+            # print('extend_snake: self-crossing detected')
+            # print('pmf of sample ='+str(pmf[0,sampled_index]))
+            # print('mask at sample ='+str(dilated_mask[new_head[0],new_head[1]]))
+            # print('smaple ='+str(new_head))
             image = np.maximum(image, l_im)
             if display:
                 plt.subplot(1, 4, 1)
