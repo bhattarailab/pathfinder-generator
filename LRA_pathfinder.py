@@ -48,7 +48,6 @@ class Args:
         self.save_images = save_images
         self.save_metadata = save_metadata
 
-t = time.time()
 args = Args()
 ## Constraints
 num_machines = int(sys.argv[1])
@@ -56,8 +55,9 @@ current_id = int(sys.argv[2])
 args.batch_id = current_id
 total_images = int(sys.argv[3])
 args.n_images = total_images/num_machines
-dataset_root = './generation'
 
+### Dataset Paths
+dataset_root = './generation'
 if len(sys.argv)==4:
     print('Using default path...')
 elif len(sys.argv)==5:
@@ -65,6 +65,35 @@ elif len(sys.argv)==5:
     dataset_root = str(sys.argv[4])
 
 
+### Dataset Configs
+
+##### Long Range Arena (LRA) configurations are in:
+##### https://github.com/google-research/long-range-arena/blob/main/lra_benchmarks/data/pathfinder.py
+
+def get_pf64u_cl14_nogap_args():
+    '''
+    This function generates pathfinder 128 in complexity of path64.
+    Path64 has paddle_margin = 1 whereas Path128 has  = [2, 3]
+    '''
+
+    args = Args()
+
+    args.padding = 1
+    args.paddle_margin_list = [1]
+    args.seed_distance = 20
+    args.window_size = [128,128]
+    args.marker_radius = 3
+    args.contour_length = 14
+    args.paddle_thickness = 1.5
+    args.antialias_scale = 2
+    args.continuity = 1.8  # from 1.8 to 0.8, with steps of 66%
+    args.distractor_length = args.contour_length / 3
+    args.num_distractor_snakes = 22 / args.distractor_length
+    args.snake_contrast_list = [0.9]
+    return args
+
+
+t = time.time()
 
 
 elapsed = time.time() - t
