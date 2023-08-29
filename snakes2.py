@@ -256,6 +256,11 @@ def from_wrapper(args):
             return
 
     while (iimg < args.n_images):
+        ### Seed every production of image
+        seed_value = args.n_images * args.batch_id + iimg
+        np.random.seed(seed_value)
+        random.seed(seed_value)
+
         ### To count time taken per images
         tt = time.time()
 
