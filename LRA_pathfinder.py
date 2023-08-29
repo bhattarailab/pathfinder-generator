@@ -92,6 +92,34 @@ def get_pf64u_cl14_nogap_args():
     args.snake_contrast_list = [0.9]
     return args
 
+##### Interpolate Dataset Between Complexity of Pathfinder64 and PathfinderX
+
+### This is base configuration
+def get_pf64u_cl14_with_gap_args():
+    '''
+    This function generates pathfinder 128 in complexity of path64 but with 
+    paddle_margin = 2 whereas No_Gap has  = 1
+    '''
+    
+    args = get_pf64u_cl14_nogap_args()
+    args.paddle_margin_list = [2, 2]
+    
+    return args
+
+#### This is pathX configuration
+def get_pf128_cl14_pathx_args():
+    '''
+    The configuration is taken from original source and modified.
+    Num_distractor_snakes is taken from: https://github.com/google-research/long-range-arena/issues/38#issuecomment-947119529
+    '''
+    
+    args = get_pf64u_cl14_nogap_args()
+    
+    args.paddle_margin_list = [2,3]
+    args.distractor_length = args.contour_length / 3
+    args.num_distractor_snakes = 35*2 / args.distractor_length
+    return args
+
 
 t = time.time()
 
