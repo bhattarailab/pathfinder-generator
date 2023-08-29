@@ -48,21 +48,19 @@ class Args:
         self.save_images = save_images
         self.save_metadata = save_metadata
 
-args = Args()
 ## Constraints
 num_machines = int(sys.argv[1])
 current_id = int(sys.argv[2])
-args.batch_id = current_id
 total_images = int(sys.argv[3])
-args.n_images = total_images/num_machines
+### sys.argv[4] contains task information (used below)
 
 ### Dataset Paths
 dataset_root = './generation'
-if len(sys.argv)==4:
+if len(sys.argv)==5:
     print('Using default path...')
-elif len(sys.argv)==5:
+elif len(sys.argv)==6:
     print('Using custom save path...')
-    dataset_root = str(sys.argv[4])
+    dataset_root = str(sys.argv[5])
 
 
 ### Dataset Configs
@@ -120,6 +118,43 @@ def get_pf128_cl14_pathx_args():
     args.num_distractor_snakes = 35*2 / args.distractor_length
     return args
 
+### This function merges the configurations of two configs
+def get_merge_cl14_args(A, B, alpha=0.5):
+    args = Args()
+    a = 1-alpha
+    b = alpha
+
+    args.padding = int(np.round(a*A.padding + b*B.padding))
+    args.antialias_scale = int(np.round(a*A.antialias_scale + b*B.antialias_scale))
+    
+    args.paddle_margin_list = [int(np.round(a*A.paddle_margin_list[0]+b*B.paddle_margin_list[0])),
+                               int(np.round(a*A.paddle_margin_list[1]+b*B.paddle_margin_list[1]))]
+    args.seed_distance = int(a*A.seed_distance + b*B.seed_distance)
+    args.window_size = [128,128]
+    args.marker_radius = a*A.marker_radius + b*B.marker_radius
+    args.paddle_thickness = a*A.paddle_thickness + b*B.paddle_thickness
+    args.paddle_thickness = float(int(np.round(args.paddle_thickness*args.antialias_scale)))/args.antialias_scale
+
+    args.continuity = a*A.continuity + b*B.continuity
+    
+    args.contour_length = 14
+    args.distractor_length = args.contour_length / 3
+
+    args.num_distractor_snakes = a*A.num_distractor_snakes + b*B.num_distractor_snakes
+    args.snake_contrast_list = [a*A.snake_contrast_list[0] + b*B.snake_contrast_list[0]]
+
+    return args
+
+
+args = Args()
+if str(sys.argv[4]).strip() == "nogap":
+    args = get_pf64u_cl14_nogap_args()
+else: 
+    alpha = float(sys.argv[4])
+    args = get_merge_cl14_args(get_pf64u_cl14_with_gap_args(), get_pf128_cl14_pathx_args(), alpha)
+
+args.batch_id = current_id
+args.n_images = total_images/num_machines
 
 t = time.time()
 
