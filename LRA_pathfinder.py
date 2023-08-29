@@ -64,59 +64,7 @@ elif len(sys.argv)==5:
     print('Using custom save path...')
     dataset_root = str(sys.argv[4])
 
-args.antialias_scale = 4
-args.paddle_margin_list = [3]
 
-args.window_size = [300,300]
-args.marker_radius = 5 #3
-args.contour_length = 6 # from 6 to 14, with steps of 50%
-args.paddle_thickness = 2 #1.5
-args.antialias_scale = 2
-args.continuity = 1.8  # from 1.8 to 0.8, with steps of 66%
-args.distractor_length = args.contour_length / 3
-args.num_distractor_snakes = 30 / args.distractor_length
-args.snake_contrast_list = [1.0]
-args.use_single_paddles = False
-args.segmentation_task = False # False
-args.segmentation_task_double_circle = False
-
-################################# DS: BASELINE
-dataset_subpath = 'curv_baseline'
-args.contour_path = os.path.join(dataset_root, dataset_subpath)
-snakes2.from_wrapper(args)
-
-################################# DS: snake length
-for cl in [9, 14]: #[9, 14]:
-    args.contour_length = cl
-    args.distractor_length = cl/3
-    dataset_subpath = 'curv_contour_length_' + str(cl)
-    args.contour_path = os.path.join(dataset_root, dataset_subpath)
-    snakes2.from_wrapper(args)
-args.contour_length = 6
-args.distractor_length = 2
-
-################################# DS: snake inter-paddle continuity
-for ct in [1.8, 0.8]:
-    args.continuity = ct
-    dataset_subpath = 'curv_continuity_' + str(ct)
-    args.contour_path = os.path.join(dataset_root, dataset_subpath)
-    # snakes2.from_wrapper(args)
-args.continuity = 1.8
-
-################################# DS: (REST OF THE 2-way MATRIX)
-# NOT IMPLEMENTED YET
-for cl in [6, 12, 15, 18]:
-    for ct in [2.7, 1.2, 0.8, 0.6]:
-        if (cl==6) & (ct ==2.7):
-            args.continuity = ct
-            args.contour_length = cl
-            args.distractor_length = cl / 3
-            # POS
-            dataset_subpath = 'curv_continuity_' + str(ct) + '_length_' + str(cl)
-            args.contour_path = os.path.join(dataset_root, dataset_subpath)
-            # snakes2.from_wrapper(args)
-        else:
-            print('not implemented.')
 
 
 elapsed = time.time() - t
