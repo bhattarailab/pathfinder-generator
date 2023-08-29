@@ -50,7 +50,7 @@ args.batch_id = start_id + int(sys.argv[3]) - 1
 total_images = int(sys.argv[4])
 args.n_images = total_images/num_machines
 
-dataset_root = '/gpfs/data/tserre/data/PSST/curvy_decoy'
+dataset_root = './generation'
 
 args.contour_length = 12 # from 6~18
 args.antialias_scale = 2
