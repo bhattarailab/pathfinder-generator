@@ -1,3 +1,6 @@
+## Arguments from LRA repository:
+### https://github.com/google-research/long-range-arena/blob/main/lra_benchmarks/data/pathfinder.py
+
 import time
 import sys
 import numpy as np
