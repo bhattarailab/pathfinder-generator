@@ -149,15 +149,22 @@ def get_merge_cl14_args(A, B, alpha=0.5):
 args = Args()
 if str(sys.argv[4]).strip() == "nogap":
     args = get_pf64u_cl14_nogap_args()
+    dataset_subpath = 'cl14_nogap'
 else: 
     alpha = float(sys.argv[4])
     args = get_merge_cl14_args(get_pf64u_cl14_with_gap_args(), get_pf128_cl14_pathx_args(), alpha)
+    dataset_subpath = 'cl14_alpha'+str(alpha)
 
 args.batch_id = current_id
-args.n_images = total_images/num_machines
+args.n_images = int(np.ceil(float(total_images)/num_machines))
 
+args.segmentation_task = False
+args.segmentation_task_double_circle = False
+
+args.contour_path = os.path.join(dataset_root, dataset_subpath)
+   
 t = time.time()
-
+snakes2.from_wrapper(args)
 
 elapsed = time.time() - t
 print('n_totl_imgs (per condition) : ', str(total_images))
