@@ -256,6 +256,9 @@ def from_wrapper(args):
             return
 
     while (iimg < args.n_images):
+        ### To count time taken per images
+        tt = time.time()
+
         label = np.random.randint(low=0,high=2)
         # print('Image# : %s'%(iimg))
 
@@ -366,6 +369,8 @@ def from_wrapper(args):
                 metadata = accumulate_meta(metadata, label, contour_sub_path, fn, args, iimg, paddle_margin=margin)
 
         iimg += 1
+
+        print('Image#: %s time: %s elapsed: %s'%(iimg, time.time()-tt, time.time()-t))
 
     if (args.save_metadata):
         matadata_nparray = np.array(metadata)
