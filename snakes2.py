@@ -288,9 +288,15 @@ def from_wrapper(args):
             print('Metadata file already exists.')
             return
 
+    def szudziks_function(a, b):
+        ### https://stackoverflow.com/questions/919612/mapping-two-integers-to-one-in-a-unique-and-deterministic-way
+        return a * a + a + b if a >= b else a + b * b
+    
     while (iimg < args.n_images):
         ### Seed every production of image
-        seed_value = args.n_images * args.batch_id + iimg
+        global_index = args.n_images * args.batch_id + iimg
+        
+        seed_value = szudziks_function(args.seed, global_index)
         np.random.seed(seed_value)
         random.seed(seed_value)
 

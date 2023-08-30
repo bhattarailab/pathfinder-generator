@@ -53,14 +53,17 @@ num_machines = int(sys.argv[1])
 current_id = int(sys.argv[2])
 total_images = int(sys.argv[3])
 ### sys.argv[4] contains task information (used below)
+task = sys.argv[4]
+seed = int(sys.argv[5])
+assert seed >= 0 and seed <=10000, "Please Enter seed >= 0 and <=10000"
 
 ### Dataset Paths
 dataset_root = './generation'
-if len(sys.argv)==5:
+if len(sys.argv)==6:
     print('Using default path...')
-elif len(sys.argv)==6:
+elif len(sys.argv)==7:
     print('Using custom save path...')
-    dataset_root = str(sys.argv[5])
+    dataset_root = str(sys.argv[6])
 
 
 ### Dataset Configs
@@ -147,17 +150,17 @@ def get_merge_cl14_args(A, B, alpha=0.5):
 
 
 args = Args()
-if str(sys.argv[4]).strip() == "nogap":
+if str(task).strip() == "nogap":
     args = get_pf64u_cl14_nogap_args()
     dataset_subpath = 'cl14_nogap'
 else: 
-    alpha = float(sys.argv[4])
+    alpha = float(task)
     args = get_merge_cl14_args(get_pf64u_cl14_with_gap_args(), get_pf128_cl14_pathx_args(), alpha)
     dataset_subpath = 'cl14_alpha'+str(alpha)
 
 args.batch_id = current_id
 args.n_images = int(np.ceil(float(total_images)/num_machines))
-
+args.seed = seed
 args.segmentation_task = False
 args.segmentation_task_double_circle = False
 
