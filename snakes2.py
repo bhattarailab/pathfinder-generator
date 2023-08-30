@@ -253,19 +253,20 @@ def from_wrapper(args):
             print("DELETING !!")
             shutil.rmtree(contour_sub_path)
             pass
+        
+        metadata_sub_path = os.path.join(args.contour_path, 'metadata', str(args.batch_id)+".npy")
+        if os.path.exists(metadata_sub_path):
+            try:
+                ### Rename Metadata file
+                print("Renaming metadata file")
+                metadata_sub_path2 = os.path.join(args.contour_path, 'metadata', str(args.batch_id)+"_bkp%s.npy"%rand_integer)
+                os.rename(metadata_sub_path, metadata_sub_path2)
 
-        try:
-            ### Rename Metadata file
-            metadata_sub_path = os.path.join(args.contour_path, 'metadata', str(args.batch_id)+".npy")
-            print("Renaming metadata file")
-            metadata_sub_path2 = os.path.join(args.contour_path, 'metadata', str(args.batch_id)+"_bkp%s.npy"%rand_integer)
-            os.rename(metadata_sub_path, metadata_sub_path2)
-
-        except:
-            print("Can't backup file: "+metadata_sub_path+" to " + metadata_sub_path2)
-            print("DELETING !!")
-            os.remove(metadata_sub_path)
-            pass
+            except:
+                print("Can't backup file: "+metadata_sub_path+" to " + metadata_sub_path2)
+                print("DELETING !!")
+                os.remove(metadata_sub_path)
+                pass
     ###################################
 
     if (args.save_images):
@@ -411,6 +412,10 @@ def from_wrapper(args):
                 scipy.misc.imsave(os.path.join(args.contour_path, contour_sub_path, fn), image_marked)
             if (args.save_metadata):
                 metadata = accumulate_meta(metadata, label, contour_sub_path, fn, args, iimg, paddle_margin=margin)
+                
+                ### Save metadata everytime in case something crashes
+                matadata_nparray = np.array(metadata)
+                snakes.save_metadata(matadata_nparray, args.contour_path, args.batch_id)
 
         iimg += 1
 
