@@ -132,6 +132,9 @@ def get_merge_cl14_args(A, B, alpha=0.5):
     
     args.paddle_margin_list = [int(np.round(a*A.paddle_margin_list[0]+b*B.paddle_margin_list[0])),
                                int(np.round(a*A.paddle_margin_list[1]+b*B.paddle_margin_list[1]))]
+    ### if the paddle margin is [2, 4] -> generate [2,3,4] paddle margins
+    args.paddle_margin_list = list(range(np.min(args.paddle_margin_list), np.max(args.paddle_margin_list)+1))
+
     args.seed_distance = int(a*A.seed_distance + b*B.seed_distance)
     args.window_size = [128,128]
     args.marker_radius = a*A.marker_radius + b*B.marker_radius
