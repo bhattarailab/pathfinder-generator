@@ -12,7 +12,7 @@ To generate pathfinder-128 with no gap between curves:
 ```python LRA_pathfinder.py <number of machines> <machine index> <total number of images to generate> <task> <seed> <OPTIONAL-data directory>```
 
 Task can be either `nogap` or float values for interpolation e.g. `0.5`   
-Seed can be between `0` and `100000`.   
+Seed can be between `0` and `2^32`.   
 Total number of images is divided among machines if multiple machines are used.
 
 

@@ -55,7 +55,7 @@ total_images = int(sys.argv[3])
 ### sys.argv[4] contains task information (used below)
 task = sys.argv[4]
 seed = int(sys.argv[5])
-assert seed >= 0 and seed <=10000, "Please Enter seed >= 0 and <=10000"
+assert seed >= 0 and seed < 2**32, "Please Enter seed >= 0 and < 2^32"
 
 ### Dataset Paths
 dataset_root = './generation'
