@@ -65,7 +65,8 @@ elif len(sys.argv)==7:
     print('Using custom save path...')
     dataset_root = str(sys.argv[6])
 
-
+dataset_root = os.path.abspath(dataset_root)
+print("Path: "+ dataset_root)
 ### Dataset Configs
 
 ##### Long Range Arena (LRA) configurations are in:
