@@ -4,7 +4,15 @@ Adapted from: https://github.com/drewlinsley/pathfinder
 
 ## Instruction on LRA dataset generator.
 
-This program uses python-2.7.   
+Install python-2 environment:
+
+* Setup python-2 conda environment.   
+`conda env create -f environment.yml`   
+`conda activate py2`
+
+
+ALTERNATIVELY:
+* This program uses python-2.7.   
 Install required libraries.   
 ```pip install -r requirements.txt``` 
 
