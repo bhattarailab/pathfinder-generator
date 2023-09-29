@@ -118,6 +118,7 @@ def get_pf128_cl14_pathx_args():
     args = get_pf64u_cl14_nogap_args()
 
     ##[pathX seems to have contrast list of 0.7 -> making alpha=1.5 have 0.7 value]
+    ##[We experiment for alpha 1.25 so that there is still some complexity towards pathX]
     args.snake_contrast_list = [0.76666666666]     
     
     args.paddle_margin_list = [2,3]
