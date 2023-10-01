@@ -32,6 +32,7 @@ six==1.16.0
 smmap==3.0.5
 smmap2==3.0.1
 subprocess32==3.5.4
+tk==0.1.0
 typing==3.10.0.0
 urllib3==1.26.15
 wandb==0.10.22
