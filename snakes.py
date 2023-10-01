@@ -2,7 +2,7 @@ import numpy as np
 import sys, os
 sys.path.append(os.path.abspath(os.path.join('..')))
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 from PIL import Image
 from PIL import ImageDraw
@@ -75,12 +75,13 @@ def make_many_snakes(image, mask,
                 return None, None
         isnake += 1
     if display_final:
-        plt.figure(figsize=(10, 10))
-        plt.subplot(1, 2, 1)
-        plt.imshow(curr_image)
-        plt.subplot(1, 2, 2)
-        plt.imshow(curr_mask)
-        plt.show()
+        # plt.figure(figsize=(10, 10))
+        # plt.subplot(1, 2, 1)
+        # plt.imshow(curr_image)
+        # plt.subplot(1, 2, 2)
+        # plt.imshow(curr_mask)
+        # plt.show()
+        pass
     return curr_image, curr_mask
 
 
@@ -146,12 +147,13 @@ def make_snake(image, mask,
     current_mask = np.maximum(current_mask, current_segment_mask)
     # display snake
     if display_snake:
-        plt.figure(figsize=(10, 10))
-        plt.subplot(1, 2, 1)
-        plt.imshow(current_image)
-        plt.subplot(1, 2, 2)
-        plt.imshow(current_mask)
-        plt.show()
+        # plt.figure(figsize=(10, 10))
+        # plt.subplot(1, 2, 1)
+        # plt.imshow(current_image)
+        # plt.subplot(1, 2, 2)
+        # plt.imshow(current_mask)
+        # plt.show()
+        pass
     return current_image, current_mask, True
 
 
@@ -217,17 +219,18 @@ def seed_snake(image, mask,
     image = np.maximum(image, l_im)
 
     if display:
-        plt.figure(figsize=(10,20))
-        plt.subplot(1, 3, 1)
-        plt.imshow(image)
-        plt.subplot(1, 3, 2)
-        plt.imshow(mask)
-        plt.subplot(1, 3, 3)
-        plt.imshow(dilated_mask)
-        plt.title(str(num_available_coordinates))
-        plt.plot(sampled_tail[1], sampled_tail[0], 'bo')
-        plt.plot(sampled_head[1], sampled_head[0], 'ro')
-        plt.show()
+        # plt.figure(figsize=(10,20))
+        # plt.subplot(1, 3, 1)
+        # plt.imshow(image)
+        # plt.subplot(1, 3, 2)
+        # plt.imshow(mask)
+        # plt.subplot(1, 3, 3)
+        # plt.imshow(dilated_mask)
+        # plt.title(str(num_available_coordinates))
+        # plt.plot(sampled_tail[1], sampled_tail[0], 'bo')
+        # plt.plot(sampled_head[1], sampled_head[0], 'ro')
+        # plt.show()
+        pass
     return image, mask, m_im, sampled_pivot, sampled_orientation_in_rad, True
 
 
@@ -275,29 +278,31 @@ def extend_snake(last_pivot, last_orientation, last_segment_mask,
             # print('smaple ='+str(new_head))
             image = np.maximum(image, l_im)
             if display:
-                plt.subplot(1, 4, 1)
-                plt.imshow(image)
-                plt.subplot(1, 4, 2)
-                plt.imshow(mask)
-                plt.subplot(1, 4, 3)
-                plt.imshow(dilated_mask)
-                plt.subplot(1, 4, 4)
-                plt.imshow(mask + m_im)
-                plt.plot(new_pivot[1],new_pivot[0], 'go')
-                plt.plot(new_head[1], new_head[0], 'ro')
-                plt.show()
+                # plt.subplot(1, 4, 1)
+                # plt.imshow(image)
+                # plt.subplot(1, 4, 2)
+                # plt.imshow(mask)
+                # plt.subplot(1, 4, 3)
+                # plt.imshow(dilated_mask)
+                # plt.subplot(1, 4, 4)
+                # plt.imshow(mask + m_im)
+                # plt.plot(new_pivot[1],new_pivot[0], 'go')
+                # plt.plot(new_head[1], new_head[0], 'ro')
+                # plt.show()
+                pass
             return image, mask, None, None, None, None, False
         else:
             image = np.maximum(image, l_im)
             mask = np.maximum(mask, last_segment_mask)
             if display:
-                plt.subplot(1, 2, 1)
-                plt.imshow(image)
-                plt.subplot(1, 2, 2)
-                plt.imshow(mask)
-                plt.plot(new_pivot[1],new_pivot[0], 'go')
-                plt.plot(new_head[1], new_head[0], 'ro')
-                plt.show()
+                # plt.subplot(1, 2, 1)
+                # plt.imshow(image)
+                # plt.subplot(1, 2, 2)
+                # plt.imshow(mask)
+                # plt.plot(new_pivot[1],new_pivot[0], 'go')
+                # plt.plot(new_head[1], new_head[0], 'ro')
+                # plt.show()
+                pass
             return image, mask, m_im, new_pivot, new_orientation, new_head, True
 
 
@@ -518,23 +523,23 @@ def test():
                                  display_final=False, display_snake=False, display_segment=False,
                                  allow_incomplete=True, allow_shorter_snakes=False, stop_with_availability=0.01)
 
-    plt.figure(figsize=(10, 10))
-    plt.subplot(2, 1, 1)
-    red_target = gray2red(image1)
-    show1 = scipy.misc.imresize(red_target, (imsize, imsize), interp='lanczos')
-    plt.imshow(show1)
-    plt.axis('off')
+    # plt.figure(figsize=(10, 10))
+    # plt.subplot(2, 1, 1)
+    # red_target = gray2red(image1)
+    # show1 = scipy.misc.imresize(red_target, (imsize, imsize), interp='lanczos')
+    # plt.imshow(show1)
+    # plt.axis('off')
 
-    plt.subplot(2, 1, 2)
-    gray_total = gray2gray(1 - image3)
-    show2 = scipy.misc.imresize(gray_total, (imsize, imsize), interp='lanczos')
-    plt.imshow(show2)
-    plt.axis('off')
+    # plt.subplot(2, 1, 2)
+    # gray_total = gray2gray(1 - image3)
+    # show2 = scipy.misc.imresize(gray_total, (imsize, imsize), interp='lanczos')
+    # plt.imshow(show2)
+    # plt.axis('off')
 
     elapsed = time.time() - t
     print('ELAPSED TIME : ', str(elapsed))
 
-    plt.show()
+    # plt.show()
 
 def from_wrapper(args):
 
@@ -607,16 +612,17 @@ def from_wrapper(args):
             final_im = interm_im
 
         if (args.pause_display):
-            plt.figure(figsize=(10, 10))
-            plt.subplot(2, 1, 1)
-            red_target = gray2red(1 - target_im)
-            plt.imshow(red_target)
-            plt.axis('off')
-            plt.subplot(2, 1, 2)
-            gray_total = gray2gray(final_im)
-            plt.imshow(gray_total)
-            plt.axis('off')
-            plt.show()
+            # plt.figure(figsize=(10, 10))
+            # plt.subplot(2, 1, 1)
+            # red_target = gray2red(1 - target_im)
+            # plt.imshow(red_target)
+            # plt.axis('off')
+            # plt.subplot(2, 1, 2)
+            # gray_total = gray2gray(final_im)
+            # plt.imshow(gray_total)
+            # plt.axis('off')
+            # plt.show()
+            pass
 
         if (args.save_images):
             fn = "sample_%s.png"%(iimg)
@@ -635,7 +641,7 @@ def from_wrapper(args):
     elapsed = time.time() - t
     print('ELAPSED TIME : ', str(elapsed))
 
-    plt.show()
+    # plt.show()
 
     return
 

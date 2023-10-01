@@ -3,7 +3,7 @@ import sys, os
 
 sys.path.append(os.path.abspath(os.path.join('..')))
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 from PIL import Image
 from PIL import ImageDraw
@@ -86,12 +86,13 @@ def two_snakes(image_size, padding, seed_distance,
     current_mask = np.maximum(current_mask, current_segment_masks[-1])
     # display snake
     if display_snake:
-        plt.figure(figsize=(10, 10))
-        plt.subplot(1, 2, 1)
-        plt.imshow(np.maximum(current_images[0],current_images[1]))
-        plt.subplot(1, 2, 2)
-        plt.imshow(current_mask)
-        plt.show()
+        # plt.figure(figsize=(10, 10))
+        # plt.subplot(1, 2, 1)
+        # plt.imshow(np.maximum(current_images[0],current_images[1]))
+        # plt.subplot(1, 2, 2)
+        # plt.imshow(current_mask)
+        # plt.show()
+        pass
     return current_images, current_mask, origin_tips, terminal_tips, True
 
 
@@ -209,14 +210,15 @@ def initialize_two_seeds(image_size, padding, seed_distance,
     image2 = np.maximum(image2, l_im)
 
     if display:
-        plt.figure(figsize=(10,20))
-        plt.imshow(np.maximum(image1, image2))
-        plt.title(str(num_available_coordinates))
-        plt.plot(sampled_tail1[1], sampled_tail1[0], 'bo')
-        plt.plot(sampled_head1[1], sampled_head1[0], 'ro')
-        plt.plot(sampled_tail2[1], sampled_tail2[0], 'bo')
-        plt.plot(sampled_head2[1], sampled_head2[0], 'ro')
-        plt.show()
+        # plt.figure(figsize=(10,20))
+        # plt.imshow(np.maximum(image1, image2))
+        # plt.title(str(num_available_coordinates))
+        # plt.plot(sampled_tail1[1], sampled_tail1[0], 'bo')
+        # plt.plot(sampled_head1[1], sampled_head1[0], 'ro')
+        # plt.plot(sampled_tail2[1], sampled_tail2[0], 'bo')
+        # plt.plot(sampled_head2[1], sampled_head2[0], 'ro')
+        # plt.show()
+        pass
 
     return [image1,image2], mask, [m_im1,m_im2], [sampled_pivot1, sampled_pivot2], [sampled_orientation_in_rad1, sampled_orientation_in_rad2], [sampled_tip1, sampled_tip2], True
 
@@ -397,12 +399,13 @@ def from_wrapper(args):
             image_marked = np.maximum(image, markers)
 
         if (args.pause_display):
-            plt.figure(figsize=(10, 10))
-            show2 = scipy.misc.imresize(image_marked, (args.window_size[0], args.window_size[1]), interp='lanczos')
-            plt.imshow(show2)
-            plt.colorbar()
-            plt.axis('off')
-            plt.show()
+            # plt.figure(figsize=(10, 10))
+            # show2 = scipy.misc.imresize(image_marked, (args.window_size[0], args.window_size[1]), interp='lanczos')
+            # plt.imshow(show2)
+            # plt.colorbar()
+            # plt.axis('off')
+            # plt.show()
+            pass
         if args.segmentation_task:
             if (args.save_images):
                 fn = "sample_%s.png"%(iimg)
